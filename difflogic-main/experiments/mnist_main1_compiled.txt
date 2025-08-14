@@ -1,0 +1,368 @@
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+/kaggle/input/diff-logic/difflogic-main/LICENSE
+/kaggle/input/diff-logic/difflogic-main/difflogic_logo.png
+/kaggle/input/diff-logic/difflogic-main/README.md
+/kaggle/input/diff-logic/difflogic-main/INSTALLATION_SUPPORT.md
+/kaggle/input/diff-logic/difflogic-main/setup.py
+/kaggle/input/diff-logic/difflogic-main/experiments/uci_datasets.py
+/kaggle/input/diff-logic/difflogic-main/experiments/apply_compiled_net.py
+/kaggle/input/diff-logic/difflogic-main/experiments/mnist_baseline1.txt
+/kaggle/input/diff-logic/difflogic-main/experiments/results_json.py
+/kaggle/input/diff-logic/difflogic-main/experiments/main.py
+/kaggle/input/diff-logic/difflogic-main/experiments/mnist_dataset.py
+/kaggle/input/diff-logic/difflogic-main/experiments/main_baseline.py
+/kaggle/input/diff-logic/difflogic-main/experiments/a.py
+/kaggle/input/diff-logic/difflogic-main/experiments/mnist_main1.txt
+/kaggle/input/diff-logic/difflogic-main/experiments/requirements.txt
+/kaggle/input/diff-logic/difflogic-main/difflogic/packbitstensor.py
+/kaggle/input/diff-logic/difflogic-main/difflogic/difflogic.py
+/kaggle/input/diff-logic/difflogic-main/difflogic/compiled_model.py
+/kaggle/input/diff-logic/difflogic-main/difflogic/__init__.py
+/kaggle/input/diff-logic/difflogic-main/difflogic/functional.py
+/kaggle/input/diff-logic/difflogic-main/difflogic/cuda/difflogic.cpp
+/kaggle/input/diff-logic/difflogic-main/difflogic/cuda/difflogic_kernel.cu
+pip install difflogic
+Collecting difflogic
+  Downloading difflogic-0.1.0.tar.gz (21 kB)
+  Preparing metadata (setup.py) ... done
+Requirement already satisfied: torch>=1.6.0 in /usr/local/lib/python3.10/dist-packages (from difflogic) (2.5.1+cu121)
+Requirement already satisfied: numpy in /usr/local/lib/python3.10/dist-packages (from difflogic) (1.26.4)
+Requirement already satisfied: filelock in /usr/local/lib/python3.10/dist-packages (from torch>=1.6.0->difflogic) (3.17.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /usr/local/lib/python3.10/dist-packages (from torch>=1.6.0->difflogic) (4.12.2)
+Requirement already satisfied: networkx in /usr/local/lib/python3.10/dist-packages (from torch>=1.6.0->difflogic) (3.4.2)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch>=1.6.0->difflogic) (3.1.4)
+Requirement already satisfied: fsspec in /usr/local/lib/python3.10/dist-packages (from torch>=1.6.0->difflogic) (2024.12.0)
+Requirement already satisfied: sympy==1.13.1 in /usr/local/lib/python3.10/dist-packages (from torch>=1.6.0->difflogic) (1.13.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.10/dist-packages (from sympy==1.13.1->torch>=1.6.0->difflogic) (1.3.0)
+Requirement already satisfied: mkl_fft in /usr/local/lib/python3.10/dist-packages (from numpy->difflogic) (1.3.8)
+Requirement already satisfied: mkl_random in /usr/local/lib/python3.10/dist-packages (from numpy->difflogic) (1.2.4)
+Requirement already satisfied: mkl_umath in /usr/local/lib/python3.10/dist-packages (from numpy->difflogic) (0.1.1)
+Requirement already satisfied: mkl in /usr/local/lib/python3.10/dist-packages (from numpy->difflogic) (2025.0.1)
+Requirement already satisfied: tbb4py in /usr/local/lib/python3.10/dist-packages (from numpy->difflogic) (2022.0.0)
+Requirement already satisfied: mkl-service in /usr/local/lib/python3.10/dist-packages (from numpy->difflogic) (2.4.1)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2->torch>=1.6.0->difflogic) (3.0.2)
+Requirement already satisfied: intel-openmp>=2024 in /usr/local/lib/python3.10/dist-packages (from mkl->numpy->difflogic) (2024.2.0)
+Requirement already satisfied: tbb==2022.* in /usr/local/lib/python3.10/dist-packages (from mkl->numpy->difflogic) (2022.0.0)
+Requirement already satisfied: tcmlib==1.* in /usr/local/lib/python3.10/dist-packages (from tbb==2022.*->mkl->numpy->difflogic) (1.2.0)
+Requirement already satisfied: intel-cmplr-lib-rt in /usr/local/lib/python3.10/dist-packages (from mkl_umath->numpy->difflogic) (2024.2.0)
+Requirement already satisfied: intel-cmplr-lib-ur==2024.2.0 in /usr/local/lib/python3.10/dist-packages (from intel-openmp>=2024->mkl->numpy->difflogic) (2024.2.0)
+Building wheels for collected packages: difflogic
+  Building wheel for difflogic (setup.py) ... done
+  Created wheel for difflogic: filename=difflogic-0.1.0-cp310-cp310-linux_x86_64.whl size=2987115 sha256=73e538f529f4fed23b5e3236a10e1dc2b8f25ebd8683859927b720f1ebc0ae08
+  Stored in directory: /root/.cache/pip/wheels/82/7c/a9/66d8139056bce535b2f76b243788228ea421e95eb6d930086a
+Successfully built difflogic
+Installing collected packages: difflogic
+Successfully installed difflogic-0.1.0
+Note: you may need to restart the kernel to use updated packages.
+!python /kaggle/input/diff-logic/difflogic-main/experiments/main.py -bs 100 -t  10 --dataset mnist20x20 -ni 200_000 -ef 1_000 -k  8_000 -l 6 --compile_model
+{'experiment_id': None, 'dataset': 'mnist20x20', 'tau': 10.0, 'seed': 0, 'batch_size': 100, 'learning_rate': 0.01, 'training_bit_count': 32, 'implementation': 'cuda', 'packbits_eval': False, 'compile_model': True, 'num_iterations': 200000, 'eval_freq': 1000, 'valid_set_size': 0.0, 'extensive_eval': False, 'connections': 'unique', 'architecture': 'randomly_connected', 'num_neurons': 8000, 'num_layers': 6, 'grad_factor': 1.0}
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz to ./data-mnist/MNIST/raw/train-images-idx3-ubyte.gz
+100%|██████████████████████████████████████| 9.91M/9.91M [00:00<00:00, 53.0MB/s]
+Extracting ./data-mnist/MNIST/raw/train-images-idx3-ubyte.gz to ./data-mnist/MNIST/raw
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz to ./data-mnist/MNIST/raw/train-labels-idx1-ubyte.gz
+100%|██████████████████████████████████████| 28.9k/28.9k [00:00<00:00, 1.54MB/s]
+Extracting ./data-mnist/MNIST/raw/train-labels-idx1-ubyte.gz to ./data-mnist/MNIST/raw
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz to ./data-mnist/MNIST/raw/t10k-images-idx3-ubyte.gz
+100%|██████████████████████████████████████| 1.65M/1.65M [00:00<00:00, 14.4MB/s]
+Extracting ./data-mnist/MNIST/raw/t10k-images-idx3-ubyte.gz to ./data-mnist/MNIST/raw
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz to ./data-mnist/MNIST/raw/t10k-labels-idx1-ubyte.gz
+100%|██████████████████████████████████████| 4.54k/4.54k [00:00<00:00, 22.0MB/s]
+Extracting ./data-mnist/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./data-mnist/MNIST/raw
+
+total_num_neurons=40000
+total_num_weights=40000
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): LogicLayer(400, 8000, train)
+  (2): LogicLayer(8000, 8000, train)
+  (3): LogicLayer(8000, 8000, train)
+  (4): LogicLayer(8000, 8000, train)
+  (5): LogicLayer(8000, 8000, train)
+  (6): LogicLayer(8000, 8000, train)
+  (7): GroupSum(k=10, tau=10.0)
+)
+iteration:   0%|▏                          | 998/200000 [00:28<55:30, 59.74it/s]{'train_acc_eval_mode': 0.9329166490832964, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9357999795675278, 'test_acc_train_mode': 0.9416999822854996}
+iteration:   1%|▎                         | 1993/200000 [00:50<56:12, 58.72it/s]{'train_acc_eval_mode': 0.9549499786893527, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9520999819040299, 'test_acc_train_mode': 0.9618999814987182}
+iteration:   1%|▍                         | 2996/200000 [01:38<53:45, 61.08it/s]{'train_acc_eval_mode': 0.9648499749104182, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9594999814033508, 'test_acc_train_mode': 0.9652999806404113}
+iteration:   2%|▌                         | 3999/200000 [02:08<54:24, 60.05it/s]{'train_acc_eval_mode': 0.9708166379729907, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9631999802589416, 'test_acc_train_mode': 0.9696999794244766}
+iteration:   2%|▋                         | 4996/200000 [02:30<54:35, 59.53it/s]{'train_acc_eval_mode': 0.9759499679009119, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9666999793052673, 'test_acc_train_mode': 0.9717999774217606}
+iteration:   3%|▊                         | 5997/200000 [03:18<52:51, 61.17it/s]{'train_acc_eval_mode': 0.9782833014925321, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9690999811887742, 'test_acc_train_mode': 0.9725999766588211}
+iteration:   3%|▉                         | 6995/200000 [03:48<53:14, 60.41it/s]{'train_acc_eval_mode': 0.9809166332085927, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9699999797344208, 'test_acc_train_mode': 0.9734999769926072}
+iteration:   4%|█                         | 7997/200000 [04:10<55:30, 57.64it/s]{'train_acc_eval_mode': 0.9827499668796857, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9703999781608581, 'test_acc_train_mode': 0.9741999757289886}
+iteration:   4%|█▏                        | 8993/200000 [04:58<55:49, 57.02it/s]{'train_acc_eval_mode': 0.9847166340549787, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.971599977016449, 'test_acc_train_mode': 0.9751999765634537}
+iteration:   5%|█▎                        | 9998/200000 [05:28<54:09, 58.46it/s]{'train_acc_eval_mode': 0.9854666337370872, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9713999778032303, 'test_acc_train_mode': 0.9743999773263932}
+iteration:   5%|█▎                       | 10993/200000 [05:49<51:38, 61.00it/s]{'train_acc_eval_mode': 0.9870499686400096, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9719999772310257, 'test_acc_train_mode': 0.9754999762773514}
+iteration:   6%|█▍                       | 11998/200000 [06:38<47:19, 66.20it/s]{'train_acc_eval_mode': 0.9884999710321426, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9716999763250351, 'test_acc_train_mode': 0.9762999773025512}
+iteration:   6%|█▌                       | 12994/200000 [07:08<48:48, 63.86it/s]{'train_acc_eval_mode': 0.9891833037137985, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9721999776363373, 'test_acc_train_mode': 0.9765999752283097}
+iteration:   7%|█▋                       | 13999/200000 [07:28<46:40, 66.43it/s]{'train_acc_eval_mode': 0.9896333049734434, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9723999774456025, 'test_acc_train_mode': 0.9761999750137329}
+iteration:   7%|█▊                       | 14995/200000 [08:01<52:10, 59.09it/s]{'train_acc_eval_mode': 0.9903999722997348, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9732999765872955, 'test_acc_train_mode': 0.9755999755859375}
+iteration:   8%|█▉                       | 15999/200000 [08:48<55:52, 54.89it/s]{'train_acc_eval_mode': 0.9915499743819237, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9725999766588211, 'test_acc_train_mode': 0.9757999747991561}
+iteration:   8%|██                       | 16996/200000 [09:18<51:36, 59.11it/s]{'train_acc_eval_mode': 0.9912333063284556, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9726999777555466, 'test_acc_train_mode': 0.9754999750852584}
+iteration:   9%|██▏                      | 17997/200000 [09:40<47:04, 64.43it/s]{'train_acc_eval_mode': 0.9920999749501547, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9739999783039093, 'test_acc_train_mode': 0.9768999755382538}
+iteration:   9%|██▎                      | 18996/200000 [10:28<51:31, 58.56it/s]{'train_acc_eval_mode': 0.992466641664505, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9748999762535095, 'test_acc_train_mode': 0.9760999774932861}
+iteration:  10%|██▍                      | 19994/200000 [10:58<51:00, 58.81it/s]{'train_acc_eval_mode': 0.9927666443586349, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9744999766349792, 'test_acc_train_mode': 0.9759999746084214}
+iteration:  10%|██▌                      | 20992/200000 [11:19<49:14, 60.59it/s]{'train_acc_eval_mode': 0.9932833100358646, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9735999763011932, 'test_acc_train_mode': 0.9756999760866165}
+iteration:  11%|██▋                      | 21996/200000 [12:08<51:32, 57.56it/s]{'train_acc_eval_mode': 0.9937999774018923, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9740999799966812, 'test_acc_train_mode': 0.9757999759912491}
+iteration:  11%|██▊                      | 22996/200000 [12:38<46:16, 63.75it/s]{'train_acc_eval_mode': 0.9936833117405574, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9743999779224396, 'test_acc_train_mode': 0.9751999771595001}
+iteration:  12%|██▉                      | 23992/200000 [12:59<49:07, 59.71it/s]{'train_acc_eval_mode': 0.993933311800162, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9745999777317047, 'test_acc_train_mode': 0.9762999755144119}
+iteration:  12%|███                      | 24996/200000 [13:32<47:25, 61.49it/s]{'train_acc_eval_mode': 0.99439997980992, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9741999787092209, 'test_acc_train_mode': 0.9758999752998352}
+iteration:  13%|███▏                     | 25998/200000 [14:18<49:22, 58.73it/s]{'train_acc_eval_mode': 0.9942333121101061, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9725999784469604, 'test_acc_train_mode': 0.9746999764442443}
+iteration:  13%|███▎                     | 26995/200000 [14:48<46:25, 62.11it/s]{'train_acc_eval_mode': 0.9940499792496363, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9746999782323837, 'test_acc_train_mode': 0.975499975681305}
+iteration:  14%|███▍                     | 27994/200000 [15:11<55:52, 51.31it/s]{'train_acc_eval_mode': 0.9944666465123494, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9741999787092209, 'test_acc_train_mode': 0.9755999755859375}
+iteration:  14%|███▎                   | 28995/200000 [15:58<1:02:06, 45.89it/s]{'train_acc_eval_mode': 0.9945833135644595, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.974099977016449, 'test_acc_train_mode': 0.9758999752998352}
+iteration:  15%|███▋                     | 29997/200000 [16:28<51:15, 55.28it/s]{'train_acc_eval_mode': 0.9944999799132347, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.974299978017807, 'test_acc_train_mode': 0.9761999762058258}
+iteration:  15%|███▊                     | 30996/200000 [16:51<49:39, 56.72it/s]{'train_acc_eval_mode': 0.9949333137273788, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9753999769687652, 'test_acc_train_mode': 0.9761999762058258}
+iteration:  16%|███▉                     | 31997/200000 [17:38<47:49, 58.55it/s]{'train_acc_eval_mode': 0.9952499827742577, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9743999779224396, 'test_acc_train_mode': 0.975699976682663}
+iteration:  16%|████                     | 32993/200000 [17:59<47:06, 59.08it/s]{'train_acc_eval_mode': 0.9951666483283043, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9747999781370162, 'test_acc_train_mode': 0.9754999774694443}
+iteration:  17%|████▏                    | 33993/200000 [18:48<47:08, 58.68it/s]{'train_acc_eval_mode': 0.9954666490356128, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.974199977517128, 'test_acc_train_mode': 0.9759999758005142}
+iteration:  17%|████▎                    | 34995/200000 [19:18<48:41, 56.49it/s]{'train_acc_eval_mode': 0.9953333156307539, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9749999767541886, 'test_acc_train_mode': 0.9760999751091003}
+iteration:  18%|████▍                    | 35992/200000 [19:39<46:38, 58.62it/s]{'train_acc_eval_mode': 0.9952499810854594, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9748999780416489, 'test_acc_train_mode': 0.9762999767065048}
+iteration:  18%|████▌                    | 36997/200000 [20:28<45:20, 59.91it/s]{'train_acc_eval_mode': 0.995099981923898, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9751999777555466, 'test_acc_train_mode': 0.9758999764919281}
+iteration:  19%|████▋                    | 37998/200000 [20:58<47:12, 57.19it/s]{'train_acc_eval_mode': 0.995366648832957, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9749999785423279, 'test_acc_train_mode': 0.9764999765157699}
+iteration:  19%|████▊                    | 38996/200000 [21:19<45:09, 59.43it/s]{'train_acc_eval_mode': 0.9954499820868175, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9752999776601792, 'test_acc_train_mode': 0.9759999775886535}
+iteration:  20%|████▉                    | 39999/200000 [21:52<42:54, 62.14it/s]{'train_acc_eval_mode': 0.9954666483402252, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9756999772787094, 'test_acc_train_mode': 0.9761999762058258}
+iteration:  20%|█████                    | 40999/200000 [22:38<41:36, 63.69it/s]{'train_acc_eval_mode': 0.9955833161870639, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9756999772787094, 'test_acc_train_mode': 0.9765999764204025}
+iteration:  21%|█████▏                   | 41992/200000 [22:58<42:35, 61.83it/s]{'train_acc_eval_mode': 0.9956166502833367, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.974999976158142, 'test_acc_train_mode': 0.9768999761343002}
+iteration:  21%|█████▎                   | 42992/200000 [23:32<45:32, 57.46it/s]{'train_acc_eval_mode': 0.9957333171367645, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.975799977183342, 'test_acc_train_mode': 0.9766999769210816}
+iteration:  22%|█████▍                   | 43998/200000 [24:18<41:10, 63.15it/s]{'train_acc_eval_mode': 0.9957333172361056, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9755999767780303, 'test_acc_train_mode': 0.9767999762296676}
+iteration:  22%|█████▌                   | 44996/200000 [24:38<42:09, 61.27it/s]{'train_acc_eval_mode': 0.9956999835371971, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976599977016449, 'test_acc_train_mode': 0.9767999768257141}
+iteration:  23%|█████▋                   | 45999/200000 [25:11<43:28, 59.05it/s]{'train_acc_eval_mode': 0.9959999846418699, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999762058258, 'test_acc_train_mode': 0.9765999758243561}
+iteration:  23%|█████▊                   | 46999/200000 [25:58<44:48, 56.91it/s]{'train_acc_eval_mode': 0.9959666512409846, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999761104584, 'test_acc_train_mode': 0.9767999762296676}
+iteration:  24%|█████▉                   | 47992/200000 [26:28<43:20, 58.45it/s]{'train_acc_eval_mode': 0.9958999845385551, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9769999766349793, 'test_acc_train_mode': 0.9769999760389328}
+iteration:  24%|██████                   | 48998/200000 [26:50<42:53, 58.68it/s]{'train_acc_eval_mode': 0.9958333172400793, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999751329422, 'test_acc_train_mode': 0.9765999764204025}
+iteration:  25%|██████▏                  | 49998/200000 [27:38<40:29, 61.74it/s]{'train_acc_eval_mode': 0.9960833172003428, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999766111374, 'test_acc_train_mode': 0.9768999761343002}
+iteration:  25%|██████▎                  | 50996/200000 [28:08<40:18, 61.61it/s]{'train_acc_eval_mode': 0.9959833170970281, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999763965607, 'test_acc_train_mode': 0.9767999762296676}
+iteration:  26%|██████▍                  | 51993/200000 [28:29<40:47, 60.48it/s]{'train_acc_eval_mode': 0.995849983394146, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9758999764919281, 'test_acc_train_mode': 0.9767999756336212}
+iteration:  26%|██████▌                  | 52998/200000 [29:18<39:19, 62.30it/s]{'train_acc_eval_mode': 0.9957999828457832, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999773025512, 'test_acc_train_mode': 0.9765999776124954}
+iteration:  27%|██████▋                  | 53994/200000 [29:48<40:47, 59.66it/s]{'train_acc_eval_mode': 0.9961333177487055, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999769210816, 'test_acc_train_mode': 0.9767999774217606}
+iteration:  27%|██████▊                  | 54997/200000 [30:08<40:26, 59.77it/s]{'train_acc_eval_mode': 0.996049984395504, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9771999764442444, 'test_acc_train_mode': 0.9771999782323837}
+iteration:  28%|██████▉                  | 55995/200000 [30:41<38:42, 61.99it/s]{'train_acc_eval_mode': 0.9960833175977071, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999769210816, 'test_acc_train_mode': 0.9772999775409699}
+iteration:  28%|███████                  | 56993/200000 [31:28<44:14, 53.87it/s]{'train_acc_eval_mode': 0.9962499845027923, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999772071839, 'test_acc_train_mode': 0.9771999776363373}
+iteration:  29%|███████▏                 | 57996/200000 [31:58<38:38, 61.25it/s]{'train_acc_eval_mode': 0.9962999852498372, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999778985977, 'test_acc_train_mode': 0.9770999765396118}
+iteration:  29%|███████▎                 | 58998/200000 [32:20<37:51, 62.07it/s]{'train_acc_eval_mode': 0.996266651848952, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999774932861, 'test_acc_train_mode': 0.9770999771356582}
+iteration:  30%|███████▍                 | 59996/200000 [33:08<36:33, 63.82it/s]{'train_acc_eval_mode': 0.9963333191474278, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999774932861, 'test_acc_train_mode': 0.9771999776363373}
+iteration:  30%|███████▌                 | 60995/200000 [33:38<39:27, 58.71it/s]{'train_acc_eval_mode': 0.9962833181023598, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999768972397, 'test_acc_train_mode': 0.9775999772548676}
+iteration:  31%|███████▋                 | 61996/200000 [34:00<46:30, 49.46it/s]{'train_acc_eval_mode': 0.9963333178559939, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999773025512, 'test_acc_train_mode': 0.977499977350235}
+iteration:  31%|███████▊                 | 62992/200000 [34:48<48:21, 47.21it/s]{'train_acc_eval_mode': 0.9965333187580109, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999778985977, 'test_acc_train_mode': 0.9776999771595001}
+iteration:  32%|███████▉                 | 63994/200000 [35:18<47:34, 47.65it/s]{'train_acc_eval_mode': 0.9967166528105735, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999778985977, 'test_acc_train_mode': 0.9778999769687653}
+iteration:  32%|████████                 | 64995/200000 [35:39<37:42, 59.68it/s]{'train_acc_eval_mode': 0.9965333192547162, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999769926071, 'test_acc_train_mode': 0.977499977350235}
+iteration:  33%|████████▏                | 65996/200000 [36:12<37:13, 60.01it/s]{'train_acc_eval_mode': 0.9964333188533783, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999778032303, 'test_acc_train_mode': 0.9773999774456024}
+iteration:  33%|████████▎                | 66995/200000 [36:58<36:04, 61.45it/s]{'train_acc_eval_mode': 0.9964333186546962, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976599977016449, 'test_acc_train_mode': 0.9770999777317048}
+iteration:  34%|████████▍                | 67994/200000 [37:28<35:52, 61.32it/s]{'train_acc_eval_mode': 0.9964499855041504, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999773025512, 'test_acc_train_mode': 0.9776999771595001}
+iteration:  34%|████████▌                | 68994/200000 [37:51<35:49, 60.94it/s]{'train_acc_eval_mode': 0.9965833195050557, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999766111374, 'test_acc_train_mode': 0.9771999776363373}
+iteration:  35%|████████▋                | 69994/200000 [38:38<38:40, 56.02it/s]{'train_acc_eval_mode': 0.99649998575449, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999763011933, 'test_acc_train_mode': 0.9775999766588211}
+iteration:  35%|████████▊                | 70994/200000 [39:08<36:15, 59.30it/s]{'train_acc_eval_mode': 0.9965833188096682, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999767065048, 'test_acc_train_mode': 0.9773999774456024}
+iteration:  36%|████████▉                | 71999/200000 [39:30<31:33, 67.60it/s]{'train_acc_eval_mode': 0.9965666528542837, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999769926071, 'test_acc_train_mode': 0.9769999778270722}
+iteration:  36%|█████████                | 72996/200000 [40:18<33:19, 63.53it/s]{'train_acc_eval_mode': 0.9966333196560542, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999778032303, 'test_acc_train_mode': 0.9768999779224395}
+iteration:  37%|█████████▏               | 73996/200000 [40:48<35:51, 58.58it/s]{'train_acc_eval_mode': 0.9963833186030387, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999768972397, 'test_acc_train_mode': 0.9767999774217606}
+iteration:  37%|█████████▎               | 74997/200000 [41:09<32:32, 64.02it/s]{'train_acc_eval_mode': 0.9969166531165441, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999771118164, 'test_acc_train_mode': 0.9770999777317048}
+iteration:  38%|█████████▍               | 75999/200000 [41:42<34:39, 59.62it/s]{'train_acc_eval_mode': 0.9966999861598015, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999773979188, 'test_acc_train_mode': 0.9771999770402908}
+iteration:  38%|█████████▌               | 76998/200000 [42:28<33:09, 61.82it/s]{'train_acc_eval_mode': 0.9968499879042307, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976699977517128, 'test_acc_train_mode': 0.9772999775409699}
+iteration:  39%|█████████▋               | 77991/200000 [42:58<33:17, 61.08it/s]{'train_acc_eval_mode': 0.9968666538596154, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999752283097, 'test_acc_train_mode': 0.9772999775409699}
+iteration:  39%|█████████▊               | 78994/200000 [43:21<33:18, 60.56it/s]{'train_acc_eval_mode': 0.9969999879598618, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999762058258, 'test_acc_train_mode': 0.9775999766588211}
+iteration:  40%|█████████▉               | 79997/200000 [44:08<36:18, 55.08it/s]{'train_acc_eval_mode': 0.996899986565113, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.975699976682663, 'test_acc_train_mode': 0.9773999768495559}
+iteration:  40%|██████████               | 80991/200000 [44:38<33:09, 59.83it/s]{'train_acc_eval_mode': 0.9968833204110463, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999763250351, 'test_acc_train_mode': 0.9776999771595001}
+iteration:  41%|██████████▏              | 81997/200000 [45:00<32:02, 61.38it/s]{'train_acc_eval_mode': 0.9968666536609332, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999764204025, 'test_acc_train_mode': 0.9773999768495559}
+iteration:  41%|██████████▎              | 82998/200000 [45:33<33:21, 58.47it/s]{'train_acc_eval_mode': 0.9968166546026865, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999765157699, 'test_acc_train_mode': 0.9778999763727189}
+iteration:  42%|██████████▍              | 83991/200000 [46:18<32:50, 58.86it/s]{'train_acc_eval_mode': 0.9969499870141347, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9767999756336212, 'test_acc_train_mode': 0.9774999767541885}
+iteration:  42%|██████████▌              | 84995/200000 [46:39<30:12, 63.44it/s]{'train_acc_eval_mode': 0.996883319914341, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9767999750375748, 'test_acc_train_mode': 0.9774999761581421}
+iteration:  43%|██████████▋              | 85995/200000 [47:12<30:10, 62.98it/s]{'train_acc_eval_mode': 0.9968166536092758, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9772999769449234, 'test_acc_train_mode': 0.9773999768495559}
+iteration:  43%|██████████▊              | 86994/200000 [47:58<31:05, 60.56it/s]{'train_acc_eval_mode': 0.9969833209117254, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9770999759435653, 'test_acc_train_mode': 0.9772999769449234}
+iteration:  44%|██████████▉              | 87994/200000 [48:28<30:23, 61.42it/s]{'train_acc_eval_mode': 0.99698332041502, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999766111374, 'test_acc_train_mode': 0.9774999761581421}
+iteration:  44%|███████████              | 88996/200000 [48:51<30:14, 61.16it/s]{'train_acc_eval_mode': 0.9969333204627037, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999757289887, 'test_acc_train_mode': 0.9771999764442444}
+iteration:  45%|███████████▏             | 89998/200000 [49:38<28:18, 64.75it/s]{'train_acc_eval_mode': 0.9970166537165642, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999768018722, 'test_acc_train_mode': 0.9770999765396118}
+iteration:  45%|███████████▎             | 90998/200000 [50:08<31:15, 58.11it/s]{'train_acc_eval_mode': 0.996866653462251, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999763965607, 'test_acc_train_mode': 0.9770999765396118}
+iteration:  46%|███████████▍             | 91995/200000 [50:28<28:57, 62.17it/s]{'train_acc_eval_mode': 0.9967333204547564, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999758243561, 'test_acc_train_mode': 0.9771999764442444}
+iteration:  46%|███████████▌             | 92999/200000 [51:01<26:48, 66.54it/s]{'train_acc_eval_mode': 0.9968666540582974, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999750137329, 'test_acc_train_mode': 0.977299976348877}
+iteration:  47%|███████████▋             | 93998/200000 [51:48<33:29, 52.76it/s]{'train_acc_eval_mode': 0.9968999871611595, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999759197235, 'test_acc_train_mode': 0.9773999762535095}
+iteration:  47%|███████████▊             | 94998/200000 [52:18<28:28, 61.45it/s]{'train_acc_eval_mode': 0.9968666542569796, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999761104584, 'test_acc_train_mode': 0.9773999762535095}
+iteration:  48%|███████████▉             | 95993/200000 [52:40<29:49, 58.13it/s]{'train_acc_eval_mode': 0.997049987912178, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999759197235, 'test_acc_train_mode': 0.977299976348877}
+iteration:  48%|████████████             | 96994/200000 [53:28<26:36, 64.54it/s]{'train_acc_eval_mode': 0.9969499879082044, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976499975323677, 'test_acc_train_mode': 0.9775999760627747}
+iteration:  49%|████████████▏            | 97996/200000 [53:58<27:37, 61.55it/s]{'train_acc_eval_mode': 0.9970166540145874, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999763965607, 'test_acc_train_mode': 0.9768999761343002}
+iteration:  49%|████████████▎            | 98995/200000 [54:20<26:52, 62.64it/s]{'train_acc_eval_mode': 0.9969499880075454, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999761104584, 'test_acc_train_mode': 0.977199975848198}
+iteration:  50%|████████████▍            | 99993/200000 [55:08<27:12, 61.26it/s]{'train_acc_eval_mode': 0.9969999871651332, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999747276306, 'test_acc_train_mode': 0.977299976348877}
+iteration:  50%|████████████            | 100998/200000 [55:38<28:07, 58.67it/s]{'train_acc_eval_mode': 0.9970333217581113, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9754999762773514, 'test_acc_train_mode': 0.9773999762535095}
+iteration:  51%|████████████▏           | 101993/200000 [55:59<28:15, 57.80it/s]{'train_acc_eval_mode': 0.9970166537165642, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.975699976682663, 'test_acc_train_mode': 0.9771999764442444}
+iteration:  51%|████████████▎           | 102998/200000 [56:48<34:33, 46.77it/s]{'train_acc_eval_mode': 0.9970999880631765, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999768972397, 'test_acc_train_mode': 0.9769999760389328}
+iteration:  52%|████████████▍           | 103995/200000 [57:09<27:51, 57.44it/s]{'train_acc_eval_mode': 0.9971166536211967, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9758999758958816, 'test_acc_train_mode': 0.9771999764442444}
+iteration:  52%|████████████▌           | 104997/200000 [57:42<24:45, 63.96it/s]{'train_acc_eval_mode': 0.9971333212653796, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999768972397, 'test_acc_train_mode': 0.9767999768257141}
+iteration:  53%|████████████▋           | 105997/200000 [58:28<25:39, 61.05it/s]{'train_acc_eval_mode': 0.9971166540185611, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999765157699, 'test_acc_train_mode': 0.9771999764442444}
+iteration:  53%|████████████▊           | 106999/200000 [58:49<25:49, 60.00it/s]{'train_acc_eval_mode': 0.9969833212097486, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999763965607, 'test_acc_train_mode': 0.9769999760389328}
+iteration:  54%|████████████▉           | 107992/200000 [59:22<26:09, 58.60it/s]{'train_acc_eval_mode': 0.9971333214640618, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999763011933, 'test_acc_train_mode': 0.9769999760389328}
+iteration:  54%|███████████▉          | 108998/200000 [1:00:08<23:36, 64.24it/s]{'train_acc_eval_mode': 0.9970499876141549, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999763011933, 'test_acc_train_mode': 0.9769999754428863}
+iteration:  55%|████████████          | 109995/200000 [1:00:38<24:02, 62.39it/s]{'train_acc_eval_mode': 0.9970999872684478, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999759197235, 'test_acc_train_mode': 0.9769999754428863}
+iteration:  55%|████████████▏         | 110999/200000 [1:01:01<22:26, 66.09it/s]{'train_acc_eval_mode': 0.9971666546662649, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.975699976682663, 'test_acc_train_mode': 0.9766999763250351}
+iteration:  56%|████████████▎         | 111992/200000 [1:01:48<27:51, 52.65it/s]{'train_acc_eval_mode': 0.9970666541655858, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9755999767780303, 'test_acc_train_mode': 0.9767999762296676}
+iteration:  56%|████████████▍         | 112995/200000 [1:02:18<23:46, 60.98it/s]{'train_acc_eval_mode': 0.9970666540662447, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9753999769687652, 'test_acc_train_mode': 0.9764999759197235}
+iteration:  57%|████████████▌         | 113999/200000 [1:02:40<20:59, 68.28it/s]{'train_acc_eval_mode': 0.9970999877651533, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.975099977850914, 'test_acc_train_mode': 0.9768999761343002}
+iteration:  57%|████████████▋         | 114993/200000 [1:03:28<23:02, 61.47it/s]{'train_acc_eval_mode': 0.9970999882618586, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9753999781608581, 'test_acc_train_mode': 0.9767999756336212}
+iteration:  58%|████████████▊         | 115998/200000 [1:03:58<22:46, 61.47it/s]{'train_acc_eval_mode': 0.9970333209633827, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9755999773740769, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  58%|████████████▊         | 116994/200000 [1:04:19<23:04, 59.93it/s]{'train_acc_eval_mode': 0.9971499879161517, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9757999759912491, 'test_acc_train_mode': 0.9771999752521515}
+iteration:  59%|████████████▉         | 117999/200000 [1:04:53<22:57, 59.53it/s]{'train_acc_eval_mode': 0.9971333211660385, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9754999768733978, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  59%|█████████████         | 118993/200000 [1:05:38<22:14, 60.70it/s]{'train_acc_eval_mode': 0.9971833213170369, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9758999758958816, 'test_acc_train_mode': 0.9771999752521515}
+iteration:  60%|█████████████▏        | 119991/200000 [1:05:59<22:36, 58.98it/s]{'train_acc_eval_mode': 0.997066654364268, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9758999764919281, 'test_acc_train_mode': 0.9771999752521515}
+iteration:  60%|█████████████▎        | 120998/200000 [1:06:32<22:13, 59.26it/s]{'train_acc_eval_mode': 0.9970999881625175, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999757289887, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  61%|█████████████▍        | 121999/200000 [1:07:18<21:22, 60.84it/s]{'train_acc_eval_mode': 0.9970666542649269, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976399976015091, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  61%|█████████████▌        | 122992/200000 [1:07:48<20:34, 62.38it/s]{'train_acc_eval_mode': 0.9971666545669238, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976399976015091, 'test_acc_train_mode': 0.9772999745607376}
+iteration:  62%|█████████████▋        | 123996/200000 [1:08:12<20:56, 60.48it/s]{'train_acc_eval_mode': 0.9971666544675827, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999759197235, 'test_acc_train_mode': 0.9775999748706817}
+iteration:  62%|█████████████▋        | 124994/200000 [1:08:58<21:39, 57.70it/s]{'train_acc_eval_mode': 0.9972333208719889, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976499975323677, 'test_acc_train_mode': 0.9772999745607376}
+iteration:  63%|█████████████▊        | 125994/200000 [1:09:28<20:11, 61.09it/s]{'train_acc_eval_mode': 0.9969999878605207, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999764204025, 'test_acc_train_mode': 0.9775999742746353}
+iteration:  63%|█████████████▉        | 126995/200000 [1:09:50<21:03, 57.76it/s]{'train_acc_eval_mode': 0.9970999877651533, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.975699976682663, 'test_acc_train_mode': 0.9773999744653702}
+iteration:  64%|██████████████        | 127994/200000 [1:10:38<19:48, 60.56it/s]{'train_acc_eval_mode': 0.9970666539669036, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9758999758958816, 'test_acc_train_mode': 0.9775999748706817}
+iteration:  64%|██████████████▏       | 128993/200000 [1:11:08<20:12, 58.58it/s]{'train_acc_eval_mode': 0.9971333211660385, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999766111374, 'test_acc_train_mode': 0.977299975156784}
+iteration:  65%|██████████████▎       | 129997/200000 [1:11:29<18:35, 62.76it/s]{'train_acc_eval_mode': 0.99734998802344, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999757289887, 'test_acc_train_mode': 0.9774999743700028}
+iteration:  65%|██████████████▍       | 130999/200000 [1:12:02<19:13, 59.81it/s]{'train_acc_eval_mode': 0.9972333216667175, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976399976015091, 'test_acc_train_mode': 0.9773999744653702}
+iteration:  66%|██████████████▌       | 131992/200000 [1:12:48<18:33, 61.05it/s]{'train_acc_eval_mode': 0.9969999870657921, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9754999762773514, 'test_acc_train_mode': 0.9775999748706817}
+iteration:  66%|██████████████▋       | 132994/200000 [1:13:18<18:57, 58.90it/s]{'train_acc_eval_mode': 0.9972333215673764, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999757051468, 'test_acc_train_mode': 0.9773999750614166}
+iteration:  67%|██████████████▋       | 133996/200000 [1:13:41<18:47, 58.54it/s]{'train_acc_eval_mode': 0.9971499881148338, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976399976015091, 'test_acc_train_mode': 0.9771999746561051}
+iteration:  67%|██████████████▊       | 134996/200000 [1:14:28<18:19, 59.11it/s]{'train_acc_eval_mode': 0.9973666552702586, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999757289887, 'test_acc_train_mode': 0.9771999746561051}
+iteration:  68%|██████████████▉       | 135994/200000 [1:14:58<18:43, 56.97it/s]{'train_acc_eval_mode': 0.9971999884645144, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999759197235, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  68%|███████████████       | 136993/200000 [1:15:21<17:03, 61.55it/s]{'train_acc_eval_mode': 0.9972999886671702, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976399974822998, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  69%|███████████████▏      | 137999/200000 [1:16:08<16:07, 64.09it/s]{'train_acc_eval_mode': 0.9972333213686944, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9758999770879746, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  69%|███████████████▎      | 138995/200000 [1:16:38<20:04, 50.64it/s]{'train_acc_eval_mode': 0.9971833216150602, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9768999749422074, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  70%|███████████████▍      | 139998/200000 [1:17:01<21:00, 47.61it/s]{'train_acc_eval_mode': 0.99721665451924, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999752044678, 'test_acc_train_mode': 0.9772999745607376}
+iteration:  70%|███████████████▌      | 140992/200000 [1:17:49<18:25, 53.36it/s]{'train_acc_eval_mode': 0.9973333225647608, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999763011933, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  71%|███████████████▌      | 141999/200000 [1:18:19<15:44, 61.42it/s]{'train_acc_eval_mode': 0.9973666553695997, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999758005142, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  71%|███████████████▋      | 142998/200000 [1:18:40<15:17, 62.14it/s]{'train_acc_eval_mode': 0.9972999890645345, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999762058258, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  72%|███████████████▊      | 143995/200000 [1:19:13<15:00, 62.20it/s]{'train_acc_eval_mode': 0.9972833215196928, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999751091003, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  72%|███████████████▉      | 144992/200000 [1:19:59<15:44, 58.27it/s]{'train_acc_eval_mode': 0.9972999884684881, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999761104584, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  73%|████████████████      | 145994/200000 [1:20:20<15:17, 58.84it/s]{'train_acc_eval_mode': 0.9973833219210306, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999757051468, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  73%|████████████████▏     | 146995/200000 [1:20:53<14:14, 62.06it/s]{'train_acc_eval_mode': 0.9973666547735532, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9756999760866165, 'test_acc_train_mode': 0.9772999745607376}
+iteration:  74%|████████████████▎     | 147994/200000 [1:21:39<13:06, 66.10it/s]{'train_acc_eval_mode': 0.9973499887188275, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999758243561, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  74%|████████████████▍     | 148994/200000 [1:21:59<13:56, 60.95it/s]{'train_acc_eval_mode': 0.9972666546702385, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999758005142, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  75%|████████████████▍     | 149995/200000 [1:22:32<13:24, 62.16it/s]{'train_acc_eval_mode': 0.9973166554172834, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9758999758958816, 'test_acc_train_mode': 0.9771999746561051}
+iteration:  75%|████████████████▌     | 150999/200000 [1:23:19<13:31, 60.35it/s]{'train_acc_eval_mode': 0.9972333216667175, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999757051468, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  76%|████████████████▋     | 151999/200000 [1:23:49<13:10, 60.73it/s]{'train_acc_eval_mode': 0.9973833227157592, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999755144119, 'test_acc_train_mode': 0.9771999746561051}
+iteration:  76%|████████████████▊     | 152990/200000 [1:24:11<13:44, 56.99it/s]{'train_acc_eval_mode': 0.9972999881704648, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999756097793, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  77%|████████████████▉     | 153999/200000 [1:24:59<12:20, 62.11it/s]{'train_acc_eval_mode': 0.9973833219210306, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999754190444, 'test_acc_train_mode': 0.9766999751329422}
+iteration:  77%|█████████████████     | 154993/200000 [1:25:29<12:16, 61.08it/s]{'train_acc_eval_mode': 0.9973499882221222, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999768018722, 'test_acc_train_mode': 0.9774999743700028}
+iteration:  78%|█████████████████▏    | 155994/200000 [1:25:51<12:11, 60.15it/s]{'train_acc_eval_mode': 0.9973833227157592, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999762058258, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  78%|█████████████████▎    | 156998/200000 [1:26:39<13:17, 53.95it/s]{'train_acc_eval_mode': 0.9972333217660586, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999756097793, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  79%|█████████████████▍    | 157994/200000 [1:27:09<12:21, 56.66it/s]{'train_acc_eval_mode': 0.9971666540702184, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999769926071, 'test_acc_train_mode': 0.9769999754428863}
+iteration:  79%|█████████████████▍    | 158999/200000 [1:27:30<10:26, 65.48it/s]{'train_acc_eval_mode': 0.9972499881188075, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999766111374, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  80%|█████████████████▌    | 159994/200000 [1:28:19<11:34, 57.59it/s]{'train_acc_eval_mode': 0.9973166552186012, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999773025512, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  80%|█████████████████▋    | 160999/200000 [1:28:49<10:43, 60.60it/s]{'train_acc_eval_mode': 0.9972833220163981, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9757999765872956, 'test_acc_train_mode': 0.9770999753475189}
+iteration:  81%|█████████████████▊    | 161997/200000 [1:29:10<09:45, 64.88it/s]{'train_acc_eval_mode': 0.9972499886155128, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999761104584, 'test_acc_train_mode': 0.9771999746561051}
+iteration:  81%|█████████████████▉    | 162999/200000 [1:29:43<09:56, 62.05it/s]{'train_acc_eval_mode': 0.9971499875187874, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999767065048, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  82%|██████████████████    | 163996/200000 [1:30:29<10:20, 57.99it/s]{'train_acc_eval_mode': 0.9972333212693533, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976399976015091, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  82%|██████████████████▏   | 164991/200000 [1:30:59<10:00, 58.31it/s]{'train_acc_eval_mode': 0.9971499879161517, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999763250351, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  83%|██████████████████▎   | 165997/200000 [1:31:22<09:44, 58.16it/s]{'train_acc_eval_mode': 0.9971999875704447, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999767065048, 'test_acc_train_mode': 0.9766999751329422}
+iteration:  83%|██████████████████▎   | 166998/200000 [1:32:09<08:56, 61.47it/s]{'train_acc_eval_mode': 0.9973333223660787, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999757289887, 'test_acc_train_mode': 0.9765999752283097}
+iteration:  84%|██████████████████▍   | 167991/200000 [1:32:39<09:00, 59.20it/s]{'train_acc_eval_mode': 0.9970833204189936, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999758243561, 'test_acc_train_mode': 0.9770999747514725}
+iteration:  84%|██████████████████▌   | 168993/200000 [1:33:02<08:40, 59.52it/s]{'train_acc_eval_mode': 0.9971999883651733, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999764204025, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  85%|██████████████████▋   | 169993/200000 [1:33:49<08:04, 61.89it/s]{'train_acc_eval_mode': 0.9972666551669439, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9767999762296676, 'test_acc_train_mode': 0.9766999751329422}
+iteration:  85%|██████████████████▊   | 170994/200000 [1:34:19<07:46, 62.17it/s]{'train_acc_eval_mode': 0.9970999873677889, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999758243561, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  86%|██████████████████▉   | 171998/200000 [1:34:42<07:47, 59.86it/s]{'train_acc_eval_mode': 0.9972666545708975, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999772071839, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  86%|███████████████████   | 172998/200000 [1:35:29<07:21, 61.11it/s]{'train_acc_eval_mode': 0.9971666544675827, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976499975323677, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  87%|███████████████████▏  | 173992/200000 [1:35:49<09:35, 45.20it/s]{'train_acc_eval_mode': 0.9972333216667175, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976399976015091, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  87%|███████████████████▏  | 174994/200000 [1:36:22<07:36, 54.80it/s]{'train_acc_eval_mode': 0.9972499879201253, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999761104584, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  88%|███████████████████▎  | 175999/200000 [1:37:09<06:22, 62.80it/s]{'train_acc_eval_mode': 0.9971833212176958, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999757051468, 'test_acc_train_mode': 0.9766999751329422}
+iteration:  88%|███████████████████▍  | 176994/200000 [1:37:29<06:17, 60.92it/s]{'train_acc_eval_mode': 0.9971666546662649, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976499975323677, 'test_acc_train_mode': 0.976499975323677}
+iteration:  89%|███████████████████▌  | 177995/200000 [1:38:02<06:15, 58.53it/s]{'train_acc_eval_mode': 0.9972166550159455, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9766999751329422, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  89%|███████████████████▋  | 178993/200000 [1:38:49<05:41, 61.58it/s]{'train_acc_eval_mode': 0.997316654920578, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9763999754190444, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  90%|███████████████████▊  | 179996/200000 [1:39:09<05:27, 61.02it/s]{'train_acc_eval_mode': 0.9972499880194664, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9769999754428863, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  90%|███████████████████▉  | 180998/200000 [1:39:42<05:24, 58.59it/s]{'train_acc_eval_mode': 0.9973166552186012, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999761104584, 'test_acc_train_mode': 0.9771999746561051}
+iteration:  91%|████████████████████  | 181998/200000 [1:40:29<04:46, 62.93it/s]{'train_acc_eval_mode': 0.997149988313516, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999759197235, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  91%|████████████████████▏ | 182994/200000 [1:40:49<04:33, 62.26it/s]{'train_acc_eval_mode': 0.9973166551192602, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9769999754428863, 'test_acc_train_mode': 0.9765999752283097}
+iteration:  92%|████████████████████▏ | 183994/200000 [1:41:23<04:25, 60.36it/s]{'train_acc_eval_mode': 0.9972999881704648, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999752283097, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  92%|████████████████████▎ | 184994/200000 [1:42:09<04:13, 59.17it/s]{'train_acc_eval_mode': 0.9973499885201454, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999752283097, 'test_acc_train_mode': 0.9765999752283097}
+iteration:  93%|████████████████████▍ | 185992/200000 [1:42:29<03:49, 61.16it/s]{'train_acc_eval_mode': 0.9972999879717827, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999755144119, 'test_acc_train_mode': 0.976499975323677}
+iteration:  93%|████████████████████▌ | 186995/200000 [1:43:03<03:24, 63.65it/s]{'train_acc_eval_mode': 0.9972166541218758, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999752283097, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  94%|████████████████████▋ | 187994/200000 [1:43:49<03:13, 62.17it/s]{'train_acc_eval_mode': 0.9973666552702586, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999752283097, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  94%|████████████████████▊ | 188996/200000 [1:44:10<02:59, 61.36it/s]{'train_acc_eval_mode': 0.9973833214243253, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9765999752283097, 'test_acc_train_mode': 0.9766999751329422}
+iteration:  95%|████████████████████▉ | 189996/200000 [1:44:59<02:47, 59.64it/s]{'train_acc_eval_mode': 0.9973499884208044, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9768999755382538, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  95%|█████████████████████ | 190999/200000 [1:45:29<02:29, 60.22it/s]{'train_acc_eval_mode': 0.9973166547218959, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.976499975323677, 'test_acc_train_mode': 0.9769999748468399}
+iteration:  96%|█████████████████████ | 191993/200000 [1:45:49<02:23, 55.75it/s]{'train_acc_eval_mode': 0.9974499888221423, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999761104584, 'test_acc_train_mode': 0.9766999751329422}
+iteration:  96%|█████████████████████▏| 192996/200000 [1:46:22<01:53, 61.78it/s]{'train_acc_eval_mode': 0.9973666549722353, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9760999757051468, 'test_acc_train_mode': 0.9768999749422074}
+iteration:  97%|█████████████████████▎| 193999/200000 [1:47:09<01:39, 60.23it/s]{'train_acc_eval_mode': 0.9974166556199392, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999759197235, 'test_acc_train_mode': 0.9766999751329422}
+iteration:  97%|█████████████████████▍| 194990/200000 [1:47:39<01:27, 57.51it/s]{'train_acc_eval_mode': 0.9974333225687345, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9759999758005142, 'test_acc_train_mode': 0.9765999752283097}
+iteration:  98%|█████████████████████▌| 195999/200000 [1:48:01<01:06, 60.24it/s]{'train_acc_eval_mode': 0.9973999886711439, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9764999759197235, 'test_acc_train_mode': 0.9767999750375748}
+iteration:  98%|█████████████████████▋| 196996/200000 [1:48:49<00:53, 55.85it/s]{'train_acc_eval_mode': 0.9973666554689408, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9757999759912491, 'test_acc_train_mode': 0.9765999752283097}
+iteration:  99%|█████████████████████▊| 197993/200000 [1:49:19<00:35, 57.19it/s]{'train_acc_eval_mode': 0.9973166550199191, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999755144119, 'test_acc_train_mode': 0.9765999752283097}
+iteration:  99%|█████████████████████▉| 198998/200000 [1:49:40<00:16, 60.32it/s]{'train_acc_eval_mode': 0.9973833225170772, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9761999762058258, 'test_acc_train_mode': 0.9766999751329422}
+iteration: 100%|█████████████████████▉| 199994/200000 [1:50:29<00:00, 58.53it/s]{'train_acc_eval_mode': 0.9973166553179423, 'train_acc_train_mode': -1, 'valid_acc_eval_mode': -1, 'valid_acc_train_mode': -1, 'test_acc_eval_mode': 0.9762999755144119, 'test_acc_train_mode': 0.9762999755144119}
+iteration: 100%|██████████████████████| 200000/200000 [1:50:29<00:00, 30.17it/s]
+Final model saved as 'model_final.pth'
+Skipping torch.nn.Flatten layer (<class 'torch.nn.modules.flatten.Flatten'>).
+Skipping GroupSum layer (<class 'difflogic.difflogic.GroupSum'>).
+`layers` created and has 6 layers.
+C code created and has 48062 lines. (temp location /tmp/tmpk9k52otl.c)
+Compiling finished in 203.940 seconds.
+lib_file copied from /tmp/tmpka_mynah.so to compiled_model.so .
+
+Measuring inference time on test data using CompiledLogicNet:
+Run 1: 0.42 ms
+Run 2: 0.45 ms
+Run 3: 0.45 ms
+Run 4: 0.50 ms
+Run 5: 0.43 ms
+Run 6: 0.47 ms
+Run 7: 0.42 ms
+Run 8: 0.45 ms
+Run 9: 0.45 ms
+Run 10: 0.45 ms
+
+Average inference time over 10 runs: 0.45 ms
+
+================================================================================
+ Converting the model to C code and compiling it...
+================================================================================
+Skipping torch.nn.Flatten layer (<class 'torch.nn.modules.flatten.Flatten'>).
+Skipping GroupSum layer (<class 'difflogic.difflogic.GroupSum'>).
+`layers` created and has 6 layers.
+C code created and has 48062 lines. (temp location /tmp/tmp1f8aqw92.c)
+Compiling finished in 205.356 seconds.
+lib_file copied from /tmp/tmpoj6wam0o.so to lib/00000000_64.so .
+x.shape (10048, 400)
+out.shape torch.Size([10000, 10])
+COMPILED MODEL 64 tensor(0.9680)
+Skipping torch.nn.Flatten layer (<class 'torch.nn.modules.flatten.Flatten'>).
+Skipping GroupSum layer (<class 'difflogic.difflogic.GroupSum'>).
+`layers` created and has 6 layers.
+C code created and has 48062 lines. (temp location /tmp/tmp347zilqp.c)
+Compiling finished in 203.245 seconds.
+lib_file copied from /tmp/tmp4rubi99b.so to lib/00000000_64.so .
+x.shape (10048, 400)
+out.shape torch.Size([10000, 10])
+COMPILED MODEL 64 tensor(0.9680)
+Skipping torch.nn.Flatten layer (<class 'torch.nn.modules.flatten.Flatten'>).
+Skipping GroupSum layer (<class 'difflogic.difflogic.GroupSum'>).
+`layers` created and has 6 layers.
+C code created and has 48062 lines. (temp location /tmp/tmp86hchr3y.c)
+Compiling finished in 205.251 seconds.
+lib_file copied from /tmp/tmpft8nxx3x.so to lib/00000000_64.so .
+x.shape (10048, 400)
+out.shape torch.Size([10000, 10])
+COMPILED MODEL 64 tensor(0.9680)
+Skipping torch.nn.Flatten layer (<class 'torch.nn.modules.flatten.Flatten'>).
+Skipping GroupSum layer (<class 'difflogic.difflogic.GroupSum'>).
+`layers` created and has 6 layers.
+C code created and has 48062 lines. (temp location /tmp/tmpd968pcrg.c)
+Compiling finished in 205.763 seconds.
+lib_file copied from /tmp/tmpw29ibv8y.so to lib/00000000_64.so .
+x.shape (10048, 400)
+out.shape torch.Size([10000, 10])
+COMPILED MODEL 64 tensor(0.9680)

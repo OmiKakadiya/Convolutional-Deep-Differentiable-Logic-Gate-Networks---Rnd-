@@ -1,0 +1,31 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Normalized gate distributions for each layer
+layer_data = {
+    0: [0.05316666666666667, 0.05658333333333333, 0.06, 0.07141666666666667, 0.06116666666666667, 0.07075, 0.059333333333333335, 0.06066666666666667, 0.05875, 0.060583333333333336, 0.0785, 0.0605, 0.0715, 0.06666666666666667, 0.057416666666666664, 0.053],
+    1: [0.06975, 0.06391666666666666, 0.06291666666666666, 0.06608333333333333, 0.06375, 0.06383333333333334, 0.050083333333333334, 0.06416666666666666, 0.062, 0.049416666666666664, 0.0615, 0.06241666666666667, 0.06333333333333334, 0.06308333333333334, 0.06541666666666666, 0.06833333333333333],
+    2: [0.029666666666666668, 0.049, 0.0495, 0.085, 0.05425, 0.09166666666666666, 0.08583333333333333, 0.053, 0.049, 0.08575, 0.09016666666666667, 0.05383333333333333, 0.09508333333333334, 0.04933333333333333, 0.04958333333333333, 0.029333333333333333],
+    3: [8.333333333333333e-05, 0.033416666666666664, 0.03375, 0.1155, 0.034166666666666665, 0.11383333333333333, 0.15683333333333332, 0.024333333333333332, 0.035, 0.15675, 0.10766666666666666, 0.023416666666666665, 0.11358333333333333, 0.023916666666666666, 0.027666666666666666, 8.333333333333333e-05]
+}
+
+operator_names = [
+    'False', 'AND', 'A and not B', 'A', 'not A and B', 'B', 'XOR', 'OR',
+    'NOR', 'XNOR', 'not B', 'A or not B', 'not A', 'not A or B', 'NAND', 'True'
+]
+
+total_neurons = 12000
+
+fig, axes = plt.subplots(4, 1, figsize=(12, 18), sharex=True)
+for layer_idx, ax in enumerate(axes):
+    raw_counts = np.array(layer_data[layer_idx]) * total_neurons
+    ax.bar(operator_names, raw_counts, color='skyblue')
+    ax.set_title(f'Layer {layer_idx} Gate Distribution')
+    ax.set_ylabel('Number of Neurons')
+    ax.set_ylim(0, max(raw_counts) * 1.1)
+    ax.grid(True, axis='y', linestyle='--', alpha=0.7)
+
+axes[-1].set_xticklabels(operator_names, rotation=45, ha='right')
+plt.xlabel('Logic Operators')
+plt.tight_layout()
+plt.show()
