@@ -1,0 +1,61 @@
+1)make sure cuda is installed( for installation issues there is file given installation support for cuda)
+
+2)then do pip install difflogic
+
+3)python experiments/main.py  -bs 100 -t  10 --dataset mnist20x20 -ni 200_000 -ef 1_000 -k  8_000 -l 6 --compile_model
+
+make sure main.py path is correct 
+
+4) after training model will be saved something as lib00007.so file 
+this file is for cpu , if in this achievable inference time is coming then will go for GPU in that some changes need to be done .
+will tell in call 
+
+5) then run the code for inference time 
+import torch
+import numpy as np
+
+batch_size = 64  # choose 64 to keep it simple
+
+# Create a dummy MNIST-like tensor with shape (batch_size, 1, 28, 28)
+dummy_input = torch.randn(batch_size, 1, 20, 20)
+
+# Flatten the input to shape (batch_size, 784)
+dummy_input_flat = torch.nn.Flatten()(dummy_input)
+
+# Round the values to 0 or 1, convert to boolean, and ensure the array is C-contiguous
+dummy_input_np = np.ascontiguousarray(dummy_input_flat.round().bool().numpy())
+
+print("Dummy input shape:", dummy_input_np.shape)  # Expected: (64, 784)
+
+# Warm-up: Run the compiled model a few times (without printing)
+for _ in range(10):
+    _ = compiled_model(dummy_input_np, verbose=False)
+
+import time
+
+num_runs = 10
+start_time = time.time()
+
+for i in range(num_runs):
+    # Run inference with the compiled model
+    output = compiled_model(dummy_input_np, verbose=False)
+    
+    # Convert the output to a torch tensor (if not already) and then compute predicted class
+    # (Assuming the compiled model returns an array that can be wrapped by torch.tensor)
+    # output_tensor = torch.tensor(output)
+    
+    # The expected shape is (padded_batch_size, num_classes). For example, if your batch is padded
+    # such that batch_size_div_bits * 64 equals the padded batch size. Here we expect it to be (64, 10).
+    # Use argmax along dimension -1 (the class dimension).
+    # predicted_class = output_tensor.argmax(dim=-1)
+    
+    # print(f"Iteration {i}: Predicted class: {predicted_class}")
+    
+end_time = time.time()
+
+elapsed_time = end_time - start_time
+avg_time_per_run = elapsed_time / num_runs
+
+print("Average compiled model inference time per run (s):", avg_time_per_run)
+print("Average compiled model inference time per sample (s):", avg_time_per_run / batch_size)
+
