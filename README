@@ -1,1 +1,3 @@
-md
+Developed a Convolutional Logic Gate Network by replacing neurons with differentiable logic gates.
+Achieved 86.29% accuracy on CIFAR-10 using a model 29× smaller than state-of-the-art with only 61M gates
+Delivered 12× faster GPU inference on MNIST and processed over 1M images/sec on a single CPU core
